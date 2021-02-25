@@ -1,0 +1,70 @@
+---
+- name: OCP Annotation of Openshift Name Spaces with Splunk Index for ONPREM-PROD
+  hosts: all
+  ignore_errors: yes
+  tasks:
+    - name: Print Header for Annotation of Openshift Name spaces with Splunk index for ONPREM-PROD
+      shell: |
+              printf '%s\n'
+
+              printf '%s\n'
+
+
+              echo "#############################################################################"
+              
+              echo -e "\t\t \033[1mOCP Annotation of OpenShift Name spaces with Splunk index for ONPREM-PROD\033[0m"
+              
+              echo "#############################################################################"
+              
+              printf '%s\n'
+              echo -e  "\t\033[1mToday's Date and Time\033[0m"
+              echo -e "\t\033[1m----------------------\033[0m"
+              printf '%s\n'
+              date +"%D %T"
+              printf '%s\n'
+              echo "*****************************************************************************"
+              printf '%s\n'
+              echo -e  "\t\033[1mOCP Annotating the Namespaces with Splunk index Started\033[0m"
+              echo -e "\t\033[1m--------------------------------------------------------\033[0m"
+              printf '%s\n'
+
+    - name: Annotate namespace congnitive-platform splunk index name ecp_automl
+      shell: oc annotate namespace cognitive-platform anthem.com/splunk.appindexname=ecp_automl
+
+    - name: Annotate namespace congnitive-platform-mat splunk index name ecp_automl          
+      shell: oc annotate namespace cognitive-platform-mat anthem.com/splunk.appindexname=ecp_automl 
+              
+    - name: Annotate namespace ds-member-svc-prod splunk index name sfa1         
+      shell: | 
+              oc annotate namespace ds-member-svc-prod anthem.com/splunk.appindexname=sfai
+              
+    - name: Annotation completion message print
+      shell: |
+              printf '%s\n'
+              echo "******************************************************************************"
+              printf '%s\n'
+
+              
+              echo -e "\t\033[1mAnnotation completed, Verifying  by describing the namespace\033[0m"
+              
+              echo -e "\t\033[1m------------------------------------------------------------\033[0m"
+              printf '%s\n'
+
+    - name: Describe Project consisting splunk lines
+      shell: oc describe project | grep -i splunk
+
+    - name: Print count of annotated namespaces with splunk index name
+      shell: |
+              printf '%s\n'
+              echo "******************************************************************************"
+              printf '%s\n'
+              echo -e "\t\033[1mCounting the annotated  namespaces\033[0m"
+              echo -e "\t\033[1m----------------------------------\033[0m"
+              printf '%s\n'
+              echo -e "The number of annotated namespaces is: "
+
+              oc describe project | grep -i splunk | wc -l
+              
+              printf '%s\n'
+              echo "******************************************************************************"
+...
