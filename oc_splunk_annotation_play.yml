@@ -1,7 +1,6 @@
 ---
 - name: OCP Annotation of Openshift Name Spaces with Splunk Index for ONPREM-PROD
   hosts: all
-  ignore_errors: yes
   tasks:
     - name: Print Header for Annotation of Openshift Name spaces with Splunk index for ONPREM-PROD
       shell: |
